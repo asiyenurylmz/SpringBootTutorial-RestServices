@@ -101,12 +101,19 @@ public class EmployeeController {
 		EntityModel<Employee> entityModel = assembler.toModel(updatedEmployee);
 
 		return ResponseEntity.created(entityModel.getRequiredLink(IanaLinkRelations.SELF).toUri()).body(entityModel);
-		//GetRequiredLink () yöntemini kullanarak, SELF ile EmployeeModelAssembler tarafından oluşturulan bağlantıyı alabiliyoruz.
+		// GetRequiredLink () yöntemini kullanarak, SELF ile EmployeeModelAssembler
+		// tarafından oluşturulan bağlantıyı alabiliyoruz.
 	}
 
+//	@DeleteMapping("/employees/{id}")
+//	void deleteEmployee(@PathVariable Long id) {
+//		repository.deleteById(id);
+//	}
+
 	@DeleteMapping("/employees/{id}")
-	void deleteEmployee(@PathVariable Long id) {
+	ResponseEntity<?> deleteEmployee(@PathVariable Long id) {
 		repository.deleteById(id);
+		return ResponseEntity.noContent().build();
 	}
 
 }
